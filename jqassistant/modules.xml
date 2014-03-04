@@ -1,0 +1,95 @@
+<jqa:jqassistant-rules xmlns:jqa="http://www.buschmais.com/jqassistant/core/analysis/rules/schema/v1.0">
+
+    <concept id="modules:DataImport">
+        <description>Labels the package "com.buschmais.workshop.dataimport" as MODULE and DATAIMPORT.</description>
+        <cypher><![CDATA[
+          MATCH
+            (m:PACKAGE)
+          WHERE
+			m.FQN="com.buschmais.workshop.dataimport"
+	      SET
+	        m:MODULE:DATAIMPORT
+          RETURN
+            m.FQN as Module
+        ]]></cypher>
+    </concept>
+
+    <concept id="modules:ShoppingCart">
+        <description>Labels the package "com.buschmais.workshop.shoppingcart" as MODULE and SHOPPINGCART.</description>
+        <cypher><![CDATA[
+          MATCH
+            (m:PACKAGE)
+          WHERE
+			m.FQN="com.buschmais.workshop.shoppingcart"
+	      SET
+	        m:MODULE:SHOPPINGCART
+          RETURN
+            m.FQN as Module
+        ]]></cypher>
+    </concept>
+
+    <concept id="modules:UserManagement">
+        <description>Labels the package "com.buschmais.workshop.usermanagement" as MODULE and USERMANAGEMENT.</description>
+        <cypher><![CDATA[
+          MATCH
+            (m:PACKAGE)
+          WHERE
+			m.FQN="com.buschmais.workshop.usermanagement"
+	      SET
+	        m:MODULE:USERMANAGEMENT
+          RETURN
+            m.FQN as Module
+        ]]></cypher>
+    </concept>
+
+    <concept id="modules:DefinedModules">
+        <requiresConcept refId="modules:DataImport" />
+        <requiresConcept refId="modules:UserManagement" />
+        <requiresConcept refId="modules:ShoppingCart" />
+        <description>Returns all defined modules.</description>
+        <cypher><![CDATA[
+          MATCH
+            (m:PACKAGE:MODULE)
+          RETURN
+            m.FQN as Module
+        ]]></cypher>
+    </concept>
+
+    <constraint id="modules:UndefinedModules">
+        <requiresConcept refId="modules:DefinedModules" />
+        <description>All direct sub-packages of "com.buschmais.workshop" must be defined as modules.</description>
+        <cypher><![CDATA[
+          MATCH
+            (root:PACKAGE)-[:CONTAINS]->(m:PACKAGE)
+          WHERE
+            root.FQN="com.buschmais.workshop"
+            AND NOT (
+              m:MODULE
+            )
+          RETURN
+            m.FQN as UndefinedModule
+        ]]></cypher>
+    </constraint>
+
+    <constraint id="modules:ShoppingCartDependencies">
+        <requiresConcept refId="modules:DefinedModules" />
+        <requiresConcept refId="dependency:Type" />
+        <description>All types in shopping cart module must only have dependencies to the user module.</description>
+        <cypher><![CDATA[
+          MATCH
+            (m1:PACKAGE:MODULE)-[:CONTAINS*0..]->(type1:TYPE),
+            (m2:PACKAGE:MODULE)-[:CONTAINS*0..]->(type2:TYPE),
+            (type1)-[:DEPENDS_ON]->(type2)
+          WHERE
+            m1<>m2 AND
+            m1:SHOPPINGCART
+            AND NOT (
+              m2:USERMANAGEMENT
+          )
+          RETURN
+            type1.FQN as Dependent, m2.FQN as InvalidModuleDependency, type2.FQN as InvalidTypeDependency
+		]]></cypher>
+    </constraint>
+
+
+</jqa:jqassistant-rules>
