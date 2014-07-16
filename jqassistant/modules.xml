@@ -1,44 +1,44 @@
 <jqa:jqassistant-rules xmlns:jqa="http://www.buschmais.com/jqassistant/core/analysis/rules/schema/v1.0">
 
     <concept id="modules:DataImport">
-        <description>Labels the package "com.buschmais.workshop.dataimport" as MODULE and DATAIMPORT.</description>
+        <description>Labels the package "com.buschmais.workshop.dataimport" as "Module" and "DataImport".</description>
         <cypher><![CDATA[
           MATCH
-            (m:PACKAGE)
+            (m:Package)
           WHERE
-			m.FQN="com.buschmais.workshop.dataimport"
+			m.fqn="com.buschmais.workshop.dataimport"
 	      SET
-	        m:MODULE:DATAIMPORT
+	        m:Module:DataImport
           RETURN
-            m.FQN as Module
+            m.fqn as Module
         ]]></cypher>
     </concept>
 
     <concept id="modules:ShoppingCart">
-        <description>Labels the package "com.buschmais.workshop.shoppingcart" as MODULE and SHOPPINGCART.</description>
+        <description>Labels the package "com.buschmais.workshop.shoppingcart" as "Module" and "ShoppingCart".</description>
         <cypher><![CDATA[
           MATCH
-            (m:PACKAGE)
+            (m:Package)
           WHERE
-			m.FQN="com.buschmais.workshop.shoppingcart"
+			m.fqn="com.buschmais.workshop.shoppingcart"
 	      SET
-	        m:MODULE:SHOPPINGCART
+	        m:Module:ShoppingCart
           RETURN
-            m.FQN as Module
+            m.fqn as Module
         ]]></cypher>
     </concept>
 
     <concept id="modules:UserManagement">
-        <description>Labels the package "com.buschmais.workshop.usermanagement" as MODULE and USERMANAGEMENT.</description>
+        <description>Labels the package "com.buschmais.workshop.usermanagement" as "Module" and "UserManagement".</description>
         <cypher><![CDATA[
           MATCH
-            (m:PACKAGE)
+            (m:Package)
           WHERE
-			m.FQN="com.buschmais.workshop.usermanagement"
+			m.fqn="com.buschmais.workshop.usermanagement"
 	      SET
-	        m:MODULE:USERMANAGEMENT
+	        m:Module:UserManagement
           RETURN
-            m.FQN as Module
+            m.fqn as Module
         ]]></cypher>
     </concept>
 
@@ -49,9 +49,9 @@
         <description>Returns all defined modules.</description>
         <cypher><![CDATA[
           MATCH
-            (m:PACKAGE:MODULE)
+            (m:Package:Module)
           RETURN
-            m.FQN as Module
+            m.fqn as Module
         ]]></cypher>
     </concept>
 
@@ -60,14 +60,14 @@
         <description>All direct sub-packages of "com.buschmais.workshop" must be defined as modules.</description>
         <cypher><![CDATA[
           MATCH
-            (root:PACKAGE)-[:CONTAINS]->(m:PACKAGE)
+            (root:Package)-[:CONTAINS]->(m:Package)
           WHERE
-            root.FQN="com.buschmais.workshop"
+            root.fqn="com.buschmais.workshop"
             AND NOT (
-              m:MODULE
+              m:Module
             )
           RETURN
-            m.FQN as UndefinedModule
+            m.fqn as UndefinedModule
         ]]></cypher>
     </constraint>
 
@@ -77,19 +77,18 @@
         <description>All types in shopping cart module must only have dependencies to the user module.</description>
         <cypher><![CDATA[
           MATCH
-            (m1:PACKAGE:MODULE)-[:CONTAINS*0..]->(type1:TYPE),
-            (m2:PACKAGE:MODULE)-[:CONTAINS*0..]->(type2:TYPE),
+            (m1:Package:Module)-[:CONTAINS*0..]->(type1:Type),
+            (m2:Package:Module)-[:CONTAINS*0..]->(type2:Type),
             (type1)-[:DEPENDS_ON]->(type2)
           WHERE
             m1<>m2 AND
-            m1:SHOPPINGCART
+            m1:ShoppingCart
             AND NOT (
-              m2:USERMANAGEMENT
+              m2:UserManagement
           )
           RETURN
-            type1.FQN as Dependent, m2.FQN as InvalidModuleDependency, type2.FQN as InvalidTypeDependency
+            type1.fqn as Dependent, m2.fqn as InvalidModuleDependency, type2.fqn as InvalidTypeDependency
 		]]></cypher>
     </constraint>
-
 
 </jqa:jqassistant-rules>

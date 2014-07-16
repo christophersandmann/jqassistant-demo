@@ -8,9 +8,9 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.buschmais.jqassistant.maven</groupId>
+                <groupId>com.buschmais.jqassistant.scm</groupId>
                 <artifactId>jqassistant-maven-plugin</artifactId>
-                <version>1.0.0-M2</version>
+                <version>1.0.0-M3</version>
                 <executions>
                     <execution>
                         <id>scan</id>
@@ -25,12 +25,12 @@
                         </goals>
                         <configuration>
                             <!--
-                                <groups>
-                                    <group>default</group>
-                                </groups>
-							-->
+                            <groups>
+                                <group>default</group>
+                            </groups>
                             <failOnConstraintViolations>false</failOnConstraintViolations>
-                        </configuration>
+							-->
+                       </configuration>
                     </execution>
                     <execution>
                         <id>report</id>
@@ -44,7 +44,7 @@
                     <dependency>
                         <groupId>com.buschmais.jqassistant.plugin</groupId>
                         <artifactId>jqassistant.plugin.javaee6</artifactId>
-                        <version>1.0.0-M2</version>
+                        <version>1.0.0-M3</version>
                     </dependency>
                 </dependencies>
             </plugin>

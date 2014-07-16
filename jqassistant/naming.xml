@@ -5,14 +5,12 @@
         <description>All JPA entities must be located in "model" packages.</description>
         <cypher><![CDATA[
           MATCH
-            (p:PACKAGE)-[:CONTAINS]->(e:JPA:ENTITY)
-          WHERE NOT (
-              p.FQN =~ ".*\\.model"
-            )
+            (p:Package)-[:CONTAINS]->(e:Jpa:Entity)
+          WHERE 
+		    p.name <> 'model'
           RETURN
-            e.FQN as Entity
+            e.fqn as Entity
         ]]></cypher>
     </constraint>
-
 
 </jqa:jqassistant-rules>
