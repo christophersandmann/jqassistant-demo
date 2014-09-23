@@ -1,12 +1,12 @@
 <jqa:jqassistant-rules xmlns:jqa="http://www.buschmais.com/jqassistant/core/analysis/rules/schema/v1.0">
 
     <concept id="modules:DataImport">
-        <description>Labels the package "com.buschmais.workshop.dataimport" as "Module" and "DataImport".</description>
+        <description>Labels the package "org.jqassistant.demo.dataimport" as "Module" and "DataImport".</description>
         <cypher><![CDATA[
           MATCH
             (m:Package)
           WHERE
-			m.fqn="com.buschmais.workshop.dataimport"
+			m.fqn="org.jqassistant.demo.dataimport"
 	      SET
 	        m:Module:DataImport
           RETURN
@@ -15,12 +15,12 @@
     </concept>
 
     <concept id="modules:ShoppingCart">
-        <description>Labels the package "com.buschmais.workshop.shoppingcart" as "Module" and "ShoppingCart".</description>
+        <description>Labels the package "org.jqassistant.demo.shoppingcart" as "Module" and "ShoppingCart".</description>
         <cypher><![CDATA[
           MATCH
             (m:Package)
           WHERE
-			m.fqn="com.buschmais.workshop.shoppingcart"
+			m.fqn="org.jqassistant.demo.shoppingcart"
 	      SET
 	        m:Module:ShoppingCart
           RETURN
@@ -29,12 +29,12 @@
     </concept>
 
     <concept id="modules:UserManagement">
-        <description>Labels the package "com.buschmais.workshop.usermanagement" as "Module" and "UserManagement".</description>
+        <description>Labels the package "org.jqassistant.demo.usermanagement" as "Module" and "UserManagement".</description>
         <cypher><![CDATA[
           MATCH
             (m:Package)
           WHERE
-			m.fqn="com.buschmais.workshop.usermanagement"
+			m.fqn="org.jqassistant.demo.usermanagement"
 	      SET
 	        m:Module:UserManagement
           RETURN
@@ -57,12 +57,12 @@
 
     <constraint id="modules:UndefinedModules">
         <requiresConcept refId="modules:DefinedModules" />
-        <description>All direct sub-packages of "com.buschmais.workshop" must be defined as modules.</description>
+        <description>All direct sub-packages of "org.jqassistant.demo" must be defined as modules.</description>
         <cypher><![CDATA[
           MATCH
             (root:Package)-[:CONTAINS]->(m:Package)
           WHERE
-            root.fqn="com.buschmais.workshop"
+            root.fqn="com.buschmais.demo"
             AND NOT (
               m:Module
             )

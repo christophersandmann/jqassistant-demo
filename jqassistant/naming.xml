@@ -13,4 +13,20 @@
         ]]></cypher>
     </constraint>
 
+    <constraint id="naming:PackageNameContainsModuleName">
+        <description>Verifies that all types are located in packages containing the group (groupId) and name (artifactId) of the Maven module.</description>
+        <cypher><![CDATA[
+         MATCH
+           (module:Maven)-[:CREATES]->(artifact:Artifact)
+         WITH
+           artifact, artifact.group + "\\." + artifact.name + "\\..*" as prefixPattern
+         MATCH
+           (artifact)-[:CONTAINS]->(type:Type)
+         WHERE NOT
+           type.fqn =~ prefixPattern
+         RETURN
+           type as TypeInInvalidPackage
+        ]]></cypher>
+    </constraint>
+
 </jqa:jqassistant-rules>
