@@ -28,12 +28,14 @@
                         <goals>
                             <goal>analyze</goal>
                         </goals>
+                        <!--
                         <configuration>
                             <groups>
                                 <group>default</group>
                             </groups>
                             <failOnConstraintViolations>false</failOnConstraintViolations>
                        </configuration>
+                        -->
                     </execution>
                     <execution>
                         <id>report</id>

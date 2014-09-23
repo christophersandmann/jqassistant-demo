@@ -6,8 +6,8 @@
         <cypher><![CDATA[
           MATCH
             (p:Package)-[:CONTAINS]->(e:Jpa:Entity)
-          WHERE 
-		    p.name <> 'model'
+          WHERE NOT
+            p.fqn =~ '.*\\.api\\.model'
           RETURN
             e.fqn as Entity
         ]]></cypher>
