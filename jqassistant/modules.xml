@@ -62,7 +62,7 @@
           MATCH
             (root:Package)-[:CONTAINS]->(m:Package)
           WHERE
-            root.fqn="com.buschmais.demo"
+            root.fqn="org.jqassistant.demo"
             AND NOT (
               m:Module
             )
