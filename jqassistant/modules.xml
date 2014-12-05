@@ -73,7 +73,6 @@
 
     <constraint id="modules:ShoppingCartDependencies">
         <requiresConcept refId="modules:DefinedModules" />
-        <requiresConcept refId="dependency:Type" />
         <description>All types in shopping cart module must only have dependencies to the user module.</description>
         <cypher><![CDATA[
           MATCH

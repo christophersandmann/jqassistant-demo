@@ -5,12 +5,9 @@
         <includeConstraint refId="modules:UndefinedModules"/>
         <includeConstraint refId="modules:ShoppingCartDependencies"/>
         <includeConstraint refId="naming:PackageNameContainsModuleName"/>
-        <!-- The following rules require jQAssistant 1.0.0-M4 -->
-        <!--
         <includeConstraint refId="junit4:AssertionMustProvideMessage"/>
         <includeConstraint refId="junit4:IgnoreWithoutMessage" />
         <includeConstraint refId="junit4:TestMethodWithoutAssertion" />
-        -->
     </group>
 
 </jqa:jqassistant-rules>
