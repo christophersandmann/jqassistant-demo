@@ -53,6 +53,21 @@
           RETURN
             m.fqn as Module
         ]]></cypher>
+        <!--
+        <cypher><![CDATA[
+            MATCH
+              (module:Package)-[:CONTAINS]->(packageInfo:Type:Interface),
+              (packageInfo)-[:ANNOTATED_BY]->(annotation)-[:OF_TYPE]->(moduleType:Type{fqn:"org.jqassistant.demo.Module"}),
+              (annotation)-[:HAS]->(nameValue:Value{name:"value"})
+            OPTIONAL MATCH
+              (annotation)-[:HAS]->(:Value{name:"dependsOn"})-[:CONTAINS]->(dependsOnValue:Value)
+            SET
+              module:Module,
+              module.moduleName = nameValue.value
+            RETURN
+              module as Module, module.moduleName, collect(dependsOnValue.value) as Dependencies
+        ]]></cypher>
+        -->
     </concept>
 
     <constraint id="modules:UndefinedModules">
