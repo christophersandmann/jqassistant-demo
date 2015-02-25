@@ -17,20 +17,16 @@
                 <version>${org.jqassistant_version}</version>
                 <executions>
                     <execution>
-                        <id>scan</id>
                         <goals>
                             <goal>scan</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>analyze</id>
-                        <goals>
                             <goal>analyze</goal>
                         </goals>
                         <configuration>
+                            <!--
                             <groups>
                                 <group>default</group>
                             </groups>
+                            -->
                             <failOnViolations>true</failOnViolations>
                        </configuration>
                     </execution>

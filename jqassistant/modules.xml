@@ -72,16 +72,17 @@
     </constraint>
 
     <constraint id="modules:ShoppingCartDependencies">
+        <requiresConcept refId="dependency:Type" />
         <requiresConcept refId="modules:DefinedModules" />
         <description>All types in shopping cart module must only have dependencies to the user module.</description>
         <cypher><![CDATA[
           MATCH
-            (m1:Package:Module)-[:CONTAINS*0..]->(type1:Type),
-            (m2:Package:Module)-[:CONTAINS*0..]->(type2:Type),
+            (m1:Module)-[:CONTAINS*0..]->(type1:Type),
+            (m2:Module)-[:CONTAINS*0..]->(type2:Type),
             (type1)-[:DEPENDS_ON]->(type2)
           WHERE
-            m1<>m2 AND
-            m1:ShoppingCart
+            m1<>m2
+            AND m1:ShoppingCart
             AND NOT (
               m2:UserManagement
           )
