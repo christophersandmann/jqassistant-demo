@@ -6,7 +6,8 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <org.jqassistant_version>1.0.0-RC-SNAPSHOT</org.jqassistant_version>
+        <org.jqassistant_version>1.0.0</org.jqassistant_version>
+        <org.asciidoctor_version>1.5.2</org.asciidoctor_version>
     </properties>
 
     <build>
@@ -22,13 +23,13 @@
                             <goal>analyze</goal>
                         </goals>
                         <configuration>
+                            <failOnViolations>true</failOnViolations>
                             <!--
                             <groups>
                                 <group>default</group>
                             </groups>
                             -->
-                            <failOnViolations>true</failOnViolations>
-                       </configuration>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>report</id>
@@ -46,6 +47,31 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>${org.asciidoctor_version}</version>
+                <executions>
+                    <execution>
+                        <id>jqassistant-rules</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>jqassistant</sourceDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <backend>xhtml5</backend>
+                    <sourceHighlighter>coderay</sourceHighlighter>
+                    <attributes>
+                        <toc>auto</toc>
+                        <toclevels>3</toclevels>
+                    </attributes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -60,6 +86,11 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.6.6</version>
         </dependency>
     </dependencies>
 

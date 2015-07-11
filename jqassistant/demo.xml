@@ -4,13 +4,11 @@
         <includeConstraint refId="naming:EntitiesInModelPackages"/>
         <includeConstraint refId="modules:UndefinedModules"/>
         <includeConstraint refId="modules:ShoppingCartDependencies"/>
-
-        <!--
         <includeConstraint refId="naming:PackageNameContainsModuleName"/>
         <includeConstraint refId="junit4:AssertionMustProvideMessage"/>
-        <includeConstraint refId="junit4:IgnoreWithoutMessage" />
-        <includeConstraint refId="junit4:TestMethodWithoutAssertion" />
-        -->
+        <includeConstraint refId="junit4:IgnoreWithoutMessage"/>
+        <includeConstraint refId="junit4:TestMethodWithoutAssertion"/>
+        <includeConstraint refId="dependency:PackageCycles"/>
     </group>
 
 </jqa:jqassistant-rules>
