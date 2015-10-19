@@ -39,7 +39,7 @@ WHERE
 SET
   module:Module
 RETURN
-  module.name as Module
+  module.name as Module, module.fqn as Package
 ----
 
 ==== Constraints
@@ -49,11 +49,9 @@ RETURN
 .All modules within the root package must be explicitly defined.
 ----
 MATCH
-  (artifact:Artifact)-[:CONTAINS]->(root:Root:Package),
-  (root)-[:CONTAINS]->(undefinedModule:Package)
-WHERE
-  artifact.type <> "test-jar"
-  and not undefinedModule:Module
+  (root:Root:Package)-[:CONTAINS]->(undefinedModule:Package)
+WHERE NOT
+  undefinedModule:Module
 RETURN
   undefinedModule.fqn as UndefinedModule
 ----
@@ -75,6 +73,7 @@ WHERE
 RETURN
   otherModule.name as InvalidModule, type1.fqn as Dependent, type2.fqn as InvalidDependency
 ----
+
 
 ==== Report
 

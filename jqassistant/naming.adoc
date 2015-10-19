@@ -10,15 +10,15 @@ The following naming rules apply:
 ==== JPA
 
 [[naming:EntitiesInModelPackages]]
-.All JPA entities must be located in "api.model" packages.
+.All JPA entities must be located in packages named "model".
 [source,cypher,role=constraint,requiresConcepts="jpa2:Entity"]
 ----
 MATCH
   (package:Package)-[:CONTAINS]->(entity:Jpa:Entity)
-WHERE NOT
-  package.fqn =~ '.*\\.api\\.model'
+WHERE
+  package.name <> "model"
 RETURN
-  entity.fqn as Entity
+  entity.fqn as EntityInWrongPackage
 ----
 
 ==== Packages
