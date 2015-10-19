@@ -88,5 +88,14 @@ MATCH
 WHERE
   module1 <> module2
 RETURN
-  module1, {role: "relationship", type:"DEPENDS_ON", startNode:module1, endNode:module2, properties: { strength : count(depends) }}, module2
+  module1, module2,
+  {
+    role : "relationship",
+    type : "DEPENDS_ON",
+    startNode : module1,
+    endNode: module2,
+    properties : {
+      weight : count(depends)
+    }
+  }
 ----
