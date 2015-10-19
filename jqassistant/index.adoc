@@ -1,0 +1,18 @@
+= Coding Rules
+
+This document describe coding rules for the Shop application.
+
+== CI Build ==
+
+The following groups are verified during a CI build:
+
+[[default]]
+[role=group,includesGroups="modules:Default,naming:Default,test:Default"]
+- <<modules:Default>>
+- <<naming:Default>>
+- <<test:Default>>
+
+include::modules.adoc[]
+include::naming.adoc[]
+include::test.adoc[]
+

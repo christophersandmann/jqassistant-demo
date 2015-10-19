@@ -6,8 +6,8 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <org.jqassistant_version>1.0.0</org.jqassistant_version>
-        <org.asciidoctor_version>1.5.2</org.asciidoctor_version>
+        <org.jqassistant_version>1.1.0-RC2-SNAPSHOT</org.jqassistant_version>
+        <org.asciidoctor_version>1.5.2.1</org.asciidoctor_version>
     </properties>
 
     <build>
@@ -23,12 +23,15 @@
                             <goal>analyze</goal>
                         </goals>
                         <configuration>
-                            <failOnViolations>true</failOnViolations>
+                            <failOnViolations>false</failOnViolations>
                             <!--
                             <groups>
                                 <group>default</group>
                             </groups>
                             -->
+                            <reportProperties>
+                                <graphml.report.directory>${project.build.directory}/graphml</graphml.report.directory>
+                            </reportProperties>
                         </configuration>
                     </execution>
                     <execution>
@@ -43,6 +46,11 @@
                     <dependency>
                         <groupId>com.buschmais.jqassistant.plugin</groupId>
                         <artifactId>jqassistant.plugin.javaee6</artifactId>
+                        <version>${org.jqassistant_version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.buschmais.jqassistant.plugin</groupId>
+                        <artifactId>jqassistant.plugin.graphml</artifactId>
                         <version>${org.jqassistant_version}</version>
                     </dependency>
                 </dependencies>
@@ -64,6 +72,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <sourceDocumentName>index.adoc</sourceDocumentName>
                     <backend>xhtml5</backend>
                     <sourceHighlighter>coderay</sourceHighlighter>
                     <attributes>

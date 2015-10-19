@@ -1,0 +1,9 @@
+[[test:Default]]
+[role=group,includesConstraints="junit4:AssertionMustProvideMessage,junit4:IgnoreWithoutMessage,junit4:TestMethodWithoutAssertion"]
+=== Test Rules
+
+The following naming rules apply:
+
+- All assertions must provide a message
+- All @Ignore annotations must provide a message
+- There must be no test method without assertion
