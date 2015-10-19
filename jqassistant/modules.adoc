@@ -7,6 +7,10 @@ The application is structured into modules, the following constraints apply:
 - <<modules:UndefinedModules>>
 - <<modules:ShoppingCartDependencies>>
 
+The following GraphML reports will be created:
+
+- <<modules:Dependencies.graphml>>
+
 ==== Concepts
 
 [[modules:Root]]

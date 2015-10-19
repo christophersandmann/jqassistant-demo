@@ -1,6 +1,6 @@
 = Coding Rules
 
-This document describe coding rules for the Shop application.
+This document describes coding rules for the shop application.
 
 == CI Build ==
 
