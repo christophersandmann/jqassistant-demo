@@ -77,7 +77,7 @@
                     <sourceHighlighter>coderay</sourceHighlighter>
                     <attributes>
                         <toc>auto</toc>
-                        <toclevels>3</toclevels>
+                        <toclevels>5</toclevels>
                     </attributes>
                 </configuration>
             </plugin>

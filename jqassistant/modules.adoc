@@ -11,6 +11,7 @@ The following GraphML reports will be created:
 
 - <<modules:Dependencies.graphml>>
 
+
 ==== Concepts
 
 [[modules:Root]]
@@ -46,6 +47,7 @@ RETURN
   module.name as Module, module.fqn as Package
 ----
 
+
 ==== Constraints
 
 [[modules:UndefinedModules]]
@@ -79,27 +81,23 @@ RETURN
 ----
 
 
-==== Report
+==== Reports
 
 [[modules:Dependencies.graphml]]
 [source,cypher,role=concept,requiresConcepts="modules:DefinedModules"]
-.Creates a GraphML report about the module structure.
+.Creates a GraphML report about the modules and their dependencies.
 ----
 MATCH
-  (module1:Module)-[:CONTAINS*0..]->(type1:Type),
-  (module2:Module)-[:CONTAINS*0..]->(type2:Type),
-  (type1)-[depends:DEPENDS_ON]->(type2)
-WHERE
-  module1 <> module2
+  (module:Module)-[:CONTAINS*0..]->(type:Type),
+OPTIONAL MATCH
+  (type)-[depends:DEPENDS_ON]->(:Type)
+WITH
+  module, collect(type) as types, collect(depends) as dependencies
 RETURN
-  module1, module2,
-  {
-    role : "relationship",
-    type : "DEPENDS_ON",
-    startNode : module1,
-    endNode: module2,
-    properties : {
-      weight : count(depends)
-    }
-  }
+ {
+    role : "graph",
+    parent : module,
+    nodes : types,
+    relationships : dependencies
+ }
 ----

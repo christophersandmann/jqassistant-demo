@@ -7,6 +7,7 @@ The following naming rules apply:
 - <<naming:EntitiesInModelPackages>>
 - <<naming:PackageNameContainsModuleName>>
 
+
 ==== JPA
 
 [[naming:EntitiesInModelPackages]]
@@ -18,8 +19,9 @@ MATCH
 WHERE
   package.name <> "model"
 RETURN
-  entity.fqn as EntityInWrongPackage
+  entity as EntityInWrongPackage
 ----
+
 
 ==== Packages
 
@@ -38,5 +40,3 @@ MATCH
  RETURN
    type as TypeInInvalidPackage
 ----
-
-

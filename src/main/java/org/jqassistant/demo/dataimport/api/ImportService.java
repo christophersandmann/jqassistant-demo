@@ -1,4 +1,4 @@
 package org.jqassistant.demo.dataimport.api;
 
-public class ImportService {
+public interface ImportService {
 }

@@ -2,6 +2,7 @@
 
 This document describes coding rules for the shop application.
 
+
 == CI Build ==
 
 The following groups are verified during a CI build:
@@ -15,4 +16,3 @@ The following groups are verified during a CI build:
 include::modules.adoc[]
 include::naming.adoc[]
 include::test.adoc[]
-
