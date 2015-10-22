@@ -5,7 +5,7 @@ This document describes coding rules for the shop application.
 
 == CI Build ==
 
-The following groups are verified during a CI build:
+The following rule groups are verified during a CI build:
 
 [[default]]
 [role=group,includesGroups="modules:Default,naming:Default,test:Default"]

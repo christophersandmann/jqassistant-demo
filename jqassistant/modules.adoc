@@ -73,9 +73,9 @@ MATCH
   (type1)-[:DEPENDS_ON]->(type2)
 WHERE
   shoppingCart <> otherModule
-  and not (
-    otherModule.name in ["usermanagement"]
-  )
+  and not otherModule.name in [
+    "usermanagement"
+  ]
 RETURN
   otherModule.name as InvalidModule, type1.fqn as Dependent, type2.fqn as InvalidDependency
 ----
